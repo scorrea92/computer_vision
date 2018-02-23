@@ -16,6 +16,8 @@ Download data and uncompress"
 Import packages"""
 
 import numpy as np
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import keras
 from keras.datasets import cifar10
