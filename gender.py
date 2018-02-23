@@ -173,15 +173,13 @@ model.add(Dropout(0.5))
 model.add(Dense(num_classes))
 model.add(Activation('softmax'))
 
-
 model.summary()
-
 
 ## OPTIM AND COMPILE
 opt = SGD(lr=0.01, decay=1e-6)
 
 model.compile(loss='categorical_crossentropy',
-              optimizer='adam',
+              optimizer=opt,
               metrics=['accuracy'])
 
 # DEFINE A LEARNING RATE SCHEDULER
