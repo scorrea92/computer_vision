@@ -17,7 +17,7 @@ Import packages"""
 
 import numpy as np
 import matplotlib
-matplotlib.use('Agg')
+matplotlib.use('GTKAgg')
 import matplotlib.pyplot as plt
 import keras
 from keras.datasets import cifar10
