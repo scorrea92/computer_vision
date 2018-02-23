@@ -129,7 +129,7 @@ testdatagen.fit(x_train)
 """Model Creation and construction"""
 
 model = Sequential()
-model.add(Conv2D(32, (3, 3), padding='same', input_shape=x_train.shape[1:]))
+model.add(Conv2D(16, (3, 3), padding='same', input_shape=x_train.shape[1:]))
 model.add(Activation('relu'))
 model.add(MaxPooling2D(pool_size=(2, 2)))
 
@@ -147,6 +147,8 @@ model.add(MaxPooling2D(pool_size=(2, 2)))
 
 model.add(Flatten())
 model.add(Dense(512))
+model.add(Activation('relu'))
+model.add(Dense(1024))
 model.add(Activation('relu'))
 
 model.add(Dense(num_classes))
