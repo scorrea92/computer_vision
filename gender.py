@@ -129,8 +129,21 @@ testdatagen.fit(x_train)
 """Model Creation and construction"""
 
 model = Sequential()
+model.add(Conv2D(32, (3, 3), padding='same', input_shape=x_train.shape[1:]))
+model.add(Activation('relu'))
+model.add(MaxPooling2D(pool_size=(2, 2)))
 
-model=CBGN(model,32,x_train.shape[1:])
+model.add(Conv2D(32, (3, 3), padding='same'))
+model.add(Activation('relu'))
+model.add(MaxPooling2D(pool_size=(2, 2)))
+
+model.add(Conv2D(64, (3, 3), padding='same'))
+model.add(Activation('relu'))
+model.add(MaxPooling2D(pool_size=(2, 2)))
+
+model.add(Conv2D(64, (3, 3), padding='same'))
+model.add(Activation('relu'))
+model.add(MaxPooling2D(pool_size=(2, 2)))
 
 model.add(Flatten())
 model.add(Dense(512))
@@ -144,7 +157,7 @@ model.summary()
 
 
 ## OPTIM AND COMPILE
-opt = SGD(lr=0.1, decay=1e-6)
+opt = SGD(lr=0.01, decay=1e-6)
 
 model.compile(loss='categorical_crossentropy',
               optimizer=opt,
@@ -167,7 +180,6 @@ history=model.fit_generator(datagen.flow(x_train, y_train,batch_size=batch_size)
                             steps_per_epoch=len(x_train) / batch_size, 
                             epochs=epochs,
                             validation_data=(x_test, y_test),
-                            callbacks=[set_lr],
                             verbose=1)
 
 
