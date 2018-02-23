@@ -107,10 +107,10 @@ y_test = keras.utils.to_categorical(y_test, num_classes)
 ## DEFINE A DATA AUGMENTATION GENERATOR
 
 datagen = ImageDataGenerator(
-  width_shift_range=0.1,
-  height_shift_range=0.1,
-  rotation_range=15,
-  zoom_range=[1.0,1.1],
+  width_shift_range=0.2,
+  height_shift_range=0.2,
+  rotation_range=20,
+  zoom_range=[1.0,1.2],
   horizontal_flip=True)
 
 
@@ -135,12 +135,6 @@ model.add(GN(0.3))
 model.add(Activation('relu'))
 model.add(MaxPooling2D(pool_size=(2, 2)))
 
-model.add(Conv2D(16, (3, 3), padding='same'))
-model.add(BN())
-model.add(GN(0.3))
-model.add(Activation('relu'))
-model.add(MaxPooling2D(pool_size=(2, 2)))
-
 model.add(Conv2D(32, (3, 3), padding='same'))
 model.add(BN())
 model.add(GN(0.3))
@@ -160,13 +154,19 @@ model.add(Activation('relu'))
 model.add(MaxPooling2D(pool_size=(2, 2)))
 
 model.add(Conv2D(64, (3, 3), padding='same'))
+model.add(BN())
+model.add(GN(0.3))
+model.add(Activation('relu'))
+model.add(MaxPooling2D(pool_size=(2, 2)))
+
+model.add(Conv2D(128, (3, 3), padding='same'))
 model.add(BN())
 model.add(GN(0.3))
 model.add(Activation('relu'))
 model.add(MaxPooling2D(pool_size=(2, 2)))
 
 model.add(Flatten())
-model.add(Dense(512))
+model.add(Dense(1024))
 model.add(Activation('relu'))
 model.add(Dropout(0.5))
 
@@ -176,7 +176,7 @@ model.add(Activation('softmax'))
 model.summary()
 
 ## OPTIM AND COMPILE
-opt = SGD(lr=0.01, decay=1e-6)
+opt = SGD(lr=0.001, decay=1e-6)
 
 model.compile(loss='categorical_crossentropy',
               optimizer=opt,
@@ -185,11 +185,11 @@ model.compile(loss='categorical_crossentropy',
 # DEFINE A LEARNING RATE SCHEDULER
 def scheduler(epoch):
     if epoch < 30:
-        return .01
+        return .001
     elif epoch < 70:
-        return 0.001
-    else:
         return 0.0001
+    else:
+        return 0.00001
 
 set_lr = LRS(scheduler)
 
