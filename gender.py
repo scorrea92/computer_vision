@@ -54,7 +54,7 @@ def CBGN(model,filters,ishape=0):
   model.add(MaxPooling2D(pool_size=(2, 2)))
   
   return model
-  
+
 """Load and prepare data"""
 
 # Load 
@@ -133,9 +133,9 @@ testdatagen.fit(x_train)
 model = Sequential()
 
 model=CBGN(model,32,x_train.shape[1:])
-model=CBGN(model,32)
 model=CBGN(model,64)
-model=CBGN(model,64)
+model=CBGN(model,128)
+model=CBGN(model,256)
 
 model.add(Flatten())
 model.add(Dense(512))
