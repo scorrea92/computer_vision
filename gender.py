@@ -107,9 +107,11 @@ y_test = keras.utils.to_categorical(y_test, num_classes)
 ## DEFINE A DATA AUGMENTATION GENERATOR
 
 datagen = ImageDataGenerator(
-  width_shift_range=0.2,
-  height_shift_range=0.2,
-  rotation_range=20,
+  featurewise_center=True,
+  featurewise_std_normalization=True,
+  width_shift_range=0.1,
+  height_shift_range=0.1,
+  rotation_range=15,
   zoom_range=[1.0,1.2],
   horizontal_flip=True)
 
@@ -186,7 +188,7 @@ model.compile(loss='categorical_crossentropy',
 def scheduler(epoch):
     if epoch < 25:
         return .1
-    elif epoch < 50:
+    elif epoch < 70 :
         return 0.01
     else:
         return 0.001
@@ -198,7 +200,7 @@ set_lr = LRS(scheduler)
 history=model.fit_generator(datagen.flow(x_train, y_train,batch_size=batch_size),
                             steps_per_epoch=len(x_train) / batch_size, 
                             epochs=epochs,
-                            validation_data=(x_test, y_test),
+                            validation_data=testdatagen.flow(x_test, y_test),
                             callbacks=[set_lr],
                             verbose=1)
 
