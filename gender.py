@@ -109,9 +109,9 @@ y_test = keras.utils.to_categorical(y_test, num_classes)
 datagen = ImageDataGenerator(
   featurewise_center=True,
   featurewise_std_normalization=True,
-  width_shift_range=0.1,
-  height_shift_range=0.1,
-  rotation_range=15,
+  width_shift_range=0.2,
+  height_shift_range=0.2,
+  rotation_range=20,
   zoom_range=[1.0,1.2],
   horizontal_flip=True)
 
@@ -186,7 +186,7 @@ model.compile(loss='categorical_crossentropy',
 
 # DEFINE A LEARNING RATE SCHEDULER
 def scheduler(epoch):
-    if epoch < 25:
+    if epoch < 30:
         return .1
     elif epoch < 70 :
         return 0.01
@@ -206,6 +206,6 @@ history=model.fit_generator(datagen.flow(x_train, y_train,batch_size=batch_size)
 
 
 ## TEST
-scores = model.evaluate(x_test, y_test, verbose=1)
-print('Test loss:', scores[0])
-print('Test accuracy:', scores[1])
+# scores = model.evaluate(x_test, y_test, verbose=1)
+# print('Test loss:', scores[0])
+# print('Test accuracy:', scores[1])
