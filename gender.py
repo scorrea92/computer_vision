@@ -31,6 +31,8 @@ from keras.optimizers import SGD
 from keras.callbacks import LearningRateScheduler as LRS
 from keras.preprocessing.image import ImageDataGenerator
 
+batch_size = 100
+epochs = 150
 
 """Model Base Functions"""
 def CBGN(model,filters,ishape=0):
