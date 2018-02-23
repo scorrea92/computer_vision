@@ -131,8 +131,6 @@ testdatagen.fit(x_train)
 model = Sequential()
 
 model=CBGN(model,32,x_train.shape[1:])
-model=CBGN(model,64)
-model=CBGN(model,128)
 
 model.add(Flatten())
 model.add(Dense(512))
