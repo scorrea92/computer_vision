@@ -52,7 +52,9 @@ def CBGN(model,filters,ishape=0):
   model.add(GN(0.3))
   model.add(Activation('relu'))
   model.add(MaxPooling2D(pool_size=(2, 2)))
-
+  
+  return model
+  
 """Load and prepare data"""
 
 # Load 
