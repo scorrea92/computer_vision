@@ -184,9 +184,9 @@ model.compile(loss='categorical_crossentropy',
 
 # DEFINE A LEARNING RATE SCHEDULER
 def scheduler(epoch):
-    if epoch < 30:
+    if epoch < 25:
         return .1
-    elif epoch < 70:
+    elif epoch < 50:
         return 0.01
     else:
         return 0.001
