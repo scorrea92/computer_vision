@@ -168,7 +168,7 @@ set_lr = LRS(scheduler)
 history=model.fit_generator(datagen.flow(x_train, y_train,batch_size=batch_size),
                             steps_per_epoch=len(x_train) / batch_size, 
                             epochs=epochs,
-                            validation_data=x_test, y_test,
+                            validation_data=(x_test, y_test),
                             callbacks=[set_lr],
                             verbose=1)
 
