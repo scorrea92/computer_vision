@@ -33,8 +33,8 @@ from keras.preprocessing.image import ImageDataGenerator
 """Load and prepare data"""
 
 # Load 
-x_train = np.load('gender/x_train.npy')
-x_test = np.load('gender/x_test.npy')
+x_train = np.load('../datasets/gender/x_train.npy')
+x_test = np.load('../datasets/gender/x_test.npy')
 
 y_train = np.load('gender/y_train.npy')
 y_test = np.load('gender/y_test.npy')
