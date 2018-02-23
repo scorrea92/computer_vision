@@ -147,7 +147,7 @@ model.summary()
 
 
 ## OPTIM AND COMPILE
-opt = SGD(lr=0.01, decay=1e-6)
+opt = SGD(lr=0.1, decay=1e-6)
 
 model.compile(loss='categorical_crossentropy',
               optimizer=opt,
