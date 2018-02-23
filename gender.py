@@ -134,6 +134,9 @@ model = Sequential()
 
 model=CBGN(model,32,x_train.shape[1:])
 model=CBGN(model,64)
+model=CBGN(model,128)
+model=CBGN(model,256)
+model=CBGN(model,512)
 
 model.add(Flatten())
 model.add(Dense(512))
@@ -156,11 +159,11 @@ model.compile(loss='categorical_crossentropy',
 # DEFINE A LEARNING RATE SCHEDULER
 def scheduler(epoch):
     if epoch < 50:
-        return .01
+        return .1
     elif epoch < 100:
-        return 0.001
+        return 0.01
     else:
-        return 0.0001
+        return 0.001
 
 set_lr = LRS(scheduler)
 
