@@ -162,17 +162,17 @@ model.summary()
 opt = SGD(lr=0.01, decay=1e-6)
 
 model.compile(loss='categorical_crossentropy',
-              optimizer=opt,
+              optimizer='adam',
               metrics=['accuracy'])
 
 # DEFINE A LEARNING RATE SCHEDULER
 def scheduler(epoch):
-    if epoch < 50:
-        return .1
-    elif epoch < 100:
-        return 0.01
-    else:
+    if epoch < 30:
+        return .01
+    elif epoch < 70:
         return 0.001
+    else:
+        return 0.0001
 
 set_lr = LRS(scheduler)
 
@@ -182,6 +182,7 @@ history=model.fit_generator(datagen.flow(x_train, y_train,batch_size=batch_size)
                             steps_per_epoch=len(x_train) / batch_size, 
                             epochs=epochs,
                             validation_data=(x_test, y_test),
+                            callbacks=[set_lr],
                             verbose=1)
 
 
