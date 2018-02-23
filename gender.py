@@ -17,7 +17,6 @@ Import packages"""
 
 import numpy as np
 import matplotlib.pyplot as plt
-from __future__ import print_function
 import keras
 from keras.datasets import cifar10
 from keras.models import Sequential
