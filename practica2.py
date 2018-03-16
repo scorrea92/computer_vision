@@ -84,7 +84,7 @@ model1 = VGG16(weights='imagenet', include_top=False, input_shape=x_train.shape[
 ###      BILINEAR        ####
 #############################
 
-for layer in model1.layer:
+for layer in model1.layers:
     layer.trainable = False
 
 def outer_product(x):
