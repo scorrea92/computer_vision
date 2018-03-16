@@ -84,6 +84,9 @@ model1 = VGG16(weights='imagenet', include_top=False, input_shape=x_train.shape[
 ###      BILINEAR        ####
 #############################
 
+for layer in model1.layer:
+    layer.trainable = False
+
 def outer_product(x):
   phi_I = tf.einsum('ijkm,ijkn->imn',x[0],x[1])		# Einstein Notation  [batch,1,1,depth] x [batch,1,1,depth] -> [batch,depth,depth]
   phi_I = tf.reshape(phi_I,[-1,512*512])	        # Reshape from [batch_size,depth,depth] to [batch_size, depth*depth]
