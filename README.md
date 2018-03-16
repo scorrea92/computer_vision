@@ -13,5 +13,5 @@ Practicas desarrolladas para la asignatura Visión por Computadora del Master IA
 
 ## Authors
 
-* **Sebastian Correa Echeverri** - *Initial work* - [scorrea92 gitlab](https://gitlab.com/scorrea92) [scorrea92 github](https://github.com/scorrea92)
+* **Sebastian Correa Echeverri** [scorrea92 gitlab](https://gitlab.com/scorrea92) [scorrea92 github](https://github.com/scorrea92)
 
