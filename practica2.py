@@ -98,7 +98,7 @@ def outer_product(x):
 
 
 
-conv=model1.get_layer('block4_pool') # block5_conv3
+conv=model1.get_layer('block5_conv3') # block5_conv3
 d1=Dropout(0.5)(conv.output)   ## Why??
 d2=Dropout(0.5)(conv.output)   ## Why??
 
