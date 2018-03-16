@@ -2,8 +2,8 @@
 
 Practicas desarrolladas para la asignatura Visión por Computadora del Master IARFID de la UPV.
 Practica 1 (Gender Recognition): 
-    *Implement a model with >95% accuracy over test set
-    *Implement a model with >90% accuracy with less than 100K parameters
+* Implement a model with >95% accuracy over test set
+* Implement a model with >90% accuracy with less than 100K parameters
 
 ## Built With
 
