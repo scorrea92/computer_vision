@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-
-
 from __future__ import print_function
 import keras
 from keras.datasets import cifar10
@@ -9,7 +7,7 @@ from keras.layers import Dense, Dropout, Activation, Flatten, Lambda
 from keras.layers import Conv2D, MaxPooling2D
 from keras.layers.normalization import BatchNormalization as BN
 from keras.layers import GaussianNoise as GN
-from keras.optimizers import SGD
+from keras.optimizers import SGD, Adam, RMSprop
 from keras.models import Model
 import tensorflow as tf
 import numpy as np
@@ -22,7 +20,7 @@ from keras.preprocessing.image import ImageDataGenerator
 
 batch_size = 32
 num_classes = 20
-epochs = 150
+epochs = 100
 
 
 
@@ -90,7 +88,7 @@ for layer in model1.layers:
 def outer_product(x):
   phi_I = tf.einsum('ijkm,ijkn->imn',x[0],x[1])		# Einstein Notation  [batch,1,1,depth] x [batch,1,1,depth] -> [batch,depth,depth]
   phi_I = tf.reshape(phi_I,[-1,512*512])	        # Reshape from [batch_size,depth,depth] to [batch_size, depth*depth]
-  phi_I = tf.divide(phi_I,15*15)								  # Divide by feature map size [sizexsize]
+  phi_I = tf.divide(phi_I,31*31)								  # Divide by feature map size [sizexsize]
 
   y_ssqrt = tf.multiply(tf.sign(phi_I),tf.sqrt(tf.abs(phi_I)+1e-12))		# Take signed square root of phi_I
   z_l2 = tf.nn.l2_normalize(y_ssqrt, dim=1)								              # Apply l2 normalization
@@ -98,7 +96,7 @@ def outer_product(x):
 
 
 
-conv=model1.get_layer('block5_conv3') # block5_conv3
+conv=model1.get_layer('block4_conv3') # block4_conv3
 d1=Dropout(0.5)(conv.output)   ## Why??
 d2=Dropout(0.5)(conv.output)   ## Why??
 
@@ -130,11 +128,13 @@ datagen = ImageDataGenerator(
   horizontal_flip=True)
 
 
-## OPTIM AND COMPILE
-opt = SGD(lr=0.1, decay=1e-6)
+## OPTIM AND COMPILE use Adam Rsmprop
+opt = SGD(lr=0.0001, decay=1e-6)
+RMSprop(lr=0.0001, rho=0.9, epsilon=None, decay=0.0)
+adam = Adam(lr=0.0001, beta_1=0.9, beta_2=0.999, epsilon=None, decay=1e-6, amsgrad=False)
 
 model.compile(loss='categorical_crossentropy',
-              optimizer=opt,
+              optimizer=adam,
               metrics=['accuracy'])
     
   
@@ -147,5 +147,12 @@ history=model.fit_generator(datagen.flow(x_train, y_train,batch_size=batch_size)
                             steps_per_epoch=len(x_train) / batch_size, 
                             epochs=epochs,
                             validation_data=(x_test, y_test),
-                            callbacks=[set_lr],
                             verbose=1)
+
+#Usar Checpoint mejor de ejecución
+#for layer in model1.layers:
+    #if j <14:
+        #if "conv" in layer.name:
+            #layer.trainable = False
+            
+#Compile y ejecutar de nuevo
