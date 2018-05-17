@@ -11,6 +11,7 @@ Practicas desarrolladas para la asignatura Visión por Computadora del Master IA
 * Load a pre-trained VGG16
 * Connect this pre-trained model and form a bi-linear
 * Train freezing weights or not
+**[Script](https://github.com/scorrea92/computer_vision/blob/master/bilinear2.ipynb)**
 
 **Practica 3 ():**
 *
