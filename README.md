@@ -13,9 +13,7 @@ Practicas desarrolladas para la asignatura Visión por Computadora del Master IA
 * Connect this pre-trained model and form a bi-linear
 * Train freezing weights or not
 * **[Script](https://github.com/scorrea92/computer_vision/blob/master/bilinear2.ipynb)**
-
-**Practica 3 ():**
-*
+* **[Report](https://github.com/scorrea92/computer_vision/blob/master/trabajo%20final.pdf)**
 
 
 ## Built With
