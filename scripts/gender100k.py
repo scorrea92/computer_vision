@@ -32,7 +32,7 @@ from keras.callbacks import LearningRateScheduler as LRS
 from keras.preprocessing.image import ImageDataGenerator
 
 batch_size = 200
-epochs = 100
+epochs = 150
 
 """Model Base Functions"""
 def CBGN(model,filters,ishape=0):
@@ -143,32 +143,32 @@ model.add(GN(0.3))
 model.add(Activation('relu'))
 model.add(MaxPooling2D(pool_size=(2, 2)))
 
-model.add(Conv2D(32, (3, 3), padding='same'))
+model.add(Conv2D(64, (3, 3), padding='same'))
 model.add(BN())
 model.add(GN(0.3))
 model.add(Activation('relu'))
 model.add(MaxPooling2D(pool_size=(2, 2)))
 
-model.add(Conv2D(32, (3, 3), padding='same'))
+model.add(Conv2D(64, (3, 3), padding='same'))
 model.add(BN())
 model.add(GN(0.3))
 model.add(Activation('relu'))
 model.add(MaxPooling2D(pool_size=(2, 2)))
 
-model.add(Conv2D(32, (3, 3), padding='same'))
+model.add(Conv2D(128, (3, 3), padding='same'))
 model.add(BN())
 model.add(GN(0.3))
 model.add(Activation('relu'))
 model.add(MaxPooling2D(pool_size=(2, 2)))
 
-model.add(Conv2D(32, (3, 3), padding='same'))
+model.add(Conv2D(128, (3, 3), padding='same'))
 model.add(BN())
 model.add(GN(0.3))
 model.add(Activation('relu'))
 model.add(MaxPooling2D(pool_size=(2, 2)))
 
 model.add(Flatten())
-model.add(Dense(128))
+model.add(Dense(512))
 model.add(Activation('relu'))
 model.add(Dropout(0.5))
 
@@ -206,6 +206,6 @@ history=model.fit_generator(datagen.flow(x_train, y_train,batch_size=batch_size)
 
 
 ## TEST
-# scores = model.evaluate(x_test, y_test, verbose=1)
-# print('Test loss:', scores[0])
-# print('Test accuracy:', scores[1])
+scores = model.evaluate(x_test, y_test, verbose=1)
+print('Test loss:', scores[0])
+print('Test accuracy:', scores[1])
